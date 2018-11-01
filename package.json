@@ -1,0 +1,16 @@
+{
+  "name": "tarnas-utils",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^34.0.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0"
+  }
+}

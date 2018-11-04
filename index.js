@@ -1,4 +1,4 @@
-const authentication = require('./authentication')
+const authentication = require('./googleAuth')
 const googleSpreadsheets = require('./googleSpreadsheets')
 
 module.exports = {

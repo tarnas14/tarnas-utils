@@ -4,7 +4,7 @@ const path = require('path')
 
 const myAmazingDb = {}
 
-module.exports = {
+module.exports = ({id: clientID, secret: clientSecret}) => ({
   routes: (app) => {
     app.get('/auth/login', (req, res) => res.redirect('/auth/google'))
     app.get('/auth/google', passport.authenticate('google', { scope: 'email https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file' }))
@@ -29,8 +29,8 @@ module.exports = {
     // -- Setting up Passport --
     passport.use(new google(
       {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
+        clientID,
+        clientSecret,
         userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo', // to avoid google plus API: https://github.com/jaredhanson/passport-google-oauth2/issues/7
         callbackURL: '/auth/callback',
       },
@@ -68,4 +68,4 @@ module.exports = {
       next()
     })
   },
-}
+})

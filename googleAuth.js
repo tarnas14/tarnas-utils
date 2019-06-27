@@ -35,6 +35,7 @@ module.exports = ({id: clientID, secret: clientSecret, devRedirect}) => ({
         clientSecret,
         userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo', // to avoid google plus API: https://github.com/jaredhanson/passport-google-oauth2/issues/7
         callbackURL: '/auth/callback',
+        proxy: true, // https://stackoverflow.com/questions/20739744/passportjs-callback-switch-between-http-and-https
       },
       (accessToken, refreshToken, profile, done) => {
         if (!myAmazingDb[profile.id]) {

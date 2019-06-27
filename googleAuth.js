@@ -4,7 +4,7 @@ const path = require('path')
 
 const myAmazingDb = {}
 
-module.exports = ({id: clientID, secret: clientSecret}) => ({
+module.exports = ({id: clientID, secret: clientSecret, devRedirect}) => ({
   routes: (app) => {
     app.get('/auth/login', (req, res) => res.redirect('/auth/google'))
     app.get('/auth/google', passport.authenticate('google', { scope: 'email https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file' }))
@@ -20,7 +20,9 @@ module.exports = ({id: clientID, secret: clientSecret}) => ({
 
         next(err, req, res)
       },
-      (req, res) => res.redirect('/'),
+      (req, res) => Boolean(devRedirect) && process.env.NODE_ENV !== 'production'
+        ? res.redirect(devRedirect)
+        : res.redirect('/'),
     )
   },
   setup: (app) => {
